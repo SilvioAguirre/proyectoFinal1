@@ -27,22 +27,27 @@ def mosttar_menu():
 
 def realizar_pedido(pedido):
     total = 0
-    if pedido in menu['bebidas']:
-        descipcion, precio = menu['bebidas'][pedido]
-        if pedido in pedidos:
-            pedidos[pedido] += precio
-        else:
-            pedidos[pedido] = precio
-        total += precio
-        print(f"Pedido: {pedido.capitalize()} - {descipcion} - ${precio:.2f}")   
+    try:
+        if pedido in menu['bebidas']:
+            descipcion, precio = menu['bebidas'][pedido]
+            if pedido in pedidos:
+                pedidos[pedido] += precio
+            else:
+                pedidos[pedido] = precio
+            total += precio
+            print(f"Pedido: {pedido.capitalize()} - {descipcion} - ${precio:.2f}")   
 
-    elif pedido in menu['comidas']:
-        descipcion, precio = menu['comidas'][pedido]
-        if pedido in pedidos:
-            pedidos[pedido] += precio
+        elif pedido in menu['comidas']:
+            descipcion, precio = menu['comidas'][pedido]
+            if pedido in pedidos:
+                pedidos[pedido] += precio
+            else:
+                pedidos[pedido] = precio
+            total += precio
+            print(f"Pedido: {pedido.capitalize()} - {descipcion} - ${precio:.2f}")
         else:
-            pedidos[pedido] = precio
-        total += precio
-        print(f"Pedido: {pedido.capitalize()} - {descipcion} - ${precio:.2f}")
-    else:
-        print("el iteam solicitado no existe en el Menú")
+            print("el iteam solicitado no existe en el Menú")
+    except ValueError as ve:
+        print(ve)
+    except Exception as e:
+        print(f'Ha ocurrido un error {e}')
